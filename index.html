@@ -54,12 +54,37 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <!-- Lucide Icons UMD -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- Firebase App (the core Firebase SDK) & Services (Compat for standalone browser script) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 <body class="bg-[#FAFAFA] text-[#0A0A0A] antialiased">
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect, useRef, useMemo } = React;
+
+    // ========================================================================
+    // FIREBASE CONFIGURATION & INITIALIZATION
+    // ========================================================================
+    const firebaseConfig = {
+      apiKey: "AIzaSyDltBbZJWcVSywBpxWEwhoGxenePhwrO-0",
+      authDomain: "webtrex-portfolio.firebaseapp.com",
+      projectId: "webtrex-portfolio",
+      storageBucket: "webtrex-portfolio.firebasestorage.app",
+      messagingSenderId: "536269316009",
+      appId: "1:536269316009:web:b90d54772768e0ab9caeb8",
+      measurementId: "G-S1N1E22ZTX"
+    };
+
+    const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+    const firebaseAnalytics = typeof firebase.analytics === 'function' ? firebase.analytics() : null;
+    const db = typeof firebase.firestore === 'function' ? firebase.firestore() : null;
+    const storage = typeof firebase.storage === 'function' ? firebase.storage() : null;
+    const auth = typeof firebase.auth === 'function' ? firebase.auth() : null;
 
     // ========================================================================
     // LUCIDE ICON REACT BRIDGE (ZERO EXTERNAL BUNDLER REQUIRED)
